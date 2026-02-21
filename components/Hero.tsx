@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight, Play, Linkedin, Twitter, Instagram, MapPin, Star, MessageCircle } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Typewriter from 'typewriter-effect';
 
 const Hero: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -110,7 +111,7 @@ const Hero: React.FC = () => {
             }
           }
         }}
-        className="relative z-10 max-w-5xl mx-auto px-6 text-center mt-12 flex flex-col items-center"
+        className="relative z-10 max-w-5xl mx-auto px-6 text-center mt-12 pt-[50px] md:pt-0 flex flex-col items-center"
       >
         <motion.div 
           variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
@@ -128,10 +129,20 @@ const Hero: React.FC = () => {
             hidden: { opacity: 0, y: 30 },
             visible: { opacity: 1, y: 0 }
           }}
-          className="text-5xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.1] mb-8 text-white tracking-tight drop-shadow-2xl"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-medium leading-[1.1] mb-8 text-white tracking-tight drop-shadow-2xl"
         >
           Verwandle Besucher in <br />
-          <span className="italic text-brand-lime">zahlende Kunden.</span>
+          <span className="italic text-brand-lime inline-block min-h-[1.1em]">
+            <Typewriter
+              options={{
+                strings: ['zahlende Kunden.', 'begeisterte Fans.', 'mehr Umsatz.'],
+                autoStart: true,
+                loop: true,
+                deleteSpeed: 50,
+                delay: 80,
+              }}
+            />
+          </span>
         </motion.h1>
 
         <motion.p 
@@ -171,36 +182,39 @@ const Hero: React.FC = () => {
             </button>
           </div>
           
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 0.8 }}
-            className="text-xs font-medium text-brand-lime/80 uppercase tracking-wider flex items-center gap-2 bg-brand-lime/5 px-3 py-1 rounded-full border border-brand-lime/10"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-lime opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-lime"></span>
-            </span>
-            Nur noch 2 Slots für diesen Monat verfügbar
-          </motion.p>
-
           <motion.a
             href="https://www.google.com/maps/place/Vamela/@48.3285839,11.4930196,10z/data=!4m8!3m7!1s0x80770147f9f01323:0x8e9cefe2762f3b7f!8m2!3d48.3285982!4d11.8226616!9m1!1b1!16s%2Fg%2F11yxzjnj68?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.8 }}
-            className="mt-6 flex items-center gap-3 px-5 py-2.5 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-all group backdrop-blur-sm"
+            transition={{ delay: 1.5, duration: 0.8 }}
+            className="mt-12 flex items-center gap-3 px-4 py-2 rounded-full hover:bg-white/5 transition-all group cursor-pointer"
           >
-            <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" />
-              ))}
+            <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center p-1">
+                <svg viewBox="0 0 24 24" className="w-full h-full">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
             </div>
-            <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-              Bewerte uns auf Google
-            </span>
+            <div className="flex flex-col items-start">
+                <div className="flex gap-0.5">
+                    {[...Array(4)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    ))}
+                    <div className="relative">
+                        <Star className="w-3 h-3 text-yellow-400" />
+                        <div className="absolute inset-0 overflow-hidden w-[80%]">
+                             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                        </div>
+                    </div>
+                </div>
+                <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider group-hover:text-white transition-colors">
+                    4.8 auf Google
+                </span>
+            </div>
           </motion.a>
         </motion.div>
 

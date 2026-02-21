@@ -67,9 +67,9 @@ const ContactForm: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   React.useEffect(() => {
-     const fetchLocation = async () => {
+const fetchLocation = async () => {
       try {
-        const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+        const response = await window.fetch('https://get.geojs.io/v1/ip/geo.json');
         if (!response.ok) throw new Error('Geo fetch failed');
         
         const data = await response.json();

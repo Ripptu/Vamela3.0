@@ -45,9 +45,9 @@ const StatsBar: React.FC = () => {
     <section className="bg-brand-dark py-32 border-t border-white/5 relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12 divide-y md:divide-y-0 md:divide-x divide-white/5">
-          <StatItem value={98} label="Kundenzufriedenheit" suffix="%" />
-          <StatItem value={24} label="Reaktionszeit" prefix="< " suffix="h" />
-          <StatItem value={5} label="Jahre Erfahrung" suffix="+" />
+          <StatItem value={50} label="Erfolgreiche Projekte" suffix="+" />
+          <StatItem value={100} label="Kundenzufriedenheit" suffix="%" />
+          <StatItem value={3} label="Jahre Erfahrung" suffix="+" />
         </div>
       </div>
     </section>

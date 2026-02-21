@@ -32,7 +32,7 @@ const CookieConsent: React.FC = () => {
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: 50, opacity: 0, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed bottom-6 right-6 z-[100] max-w-[420px] w-[calc(100%-3rem)] md:w-full"
+          className="fixed bottom-6 left-6 z-[100] max-w-[420px] w-[calc(100%-3rem)] md:w-full"
         >
           {/* Main Glass Container */}
           <div className="relative overflow-hidden rounded-2xl bg-[#0F0F0F]/80 backdrop-blur-xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">

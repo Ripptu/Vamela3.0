@@ -15,13 +15,12 @@
     <meta property="og:description" content="Lass uns deine Vision digital sichtbar machen. High-End Webdesign aus Haag an der Amper." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.vamela.info" />
-    <meta property="og:image" content="https://www.vamela.info/og-image.jpg" />
+    <meta property="og:image" content="https://framerusercontent.com/images/dkfZWs67IxX9Sb9uDq2HYuGySQ.png" />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content="VAMELA" />
 
     <!-- Icons -->
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/zJnM9p25/icon-png.png" />
-    <link rel="apple-touch-icon" href="https://i.postimg.cc/zJnM9p25/icon-png.png" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20 20 L50 90 L80 20' fill='none' stroke='%23D4F250' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -77,6 +76,8 @@
         width: 100%;
         height: auto;
         overflow-x: hidden;
+        scroll-snap-type: y proximity;
+        scroll-padding-top: 80px; /* Offset for sticky header if needed, though header is not sticky in this design usually */
       }
       
       body {

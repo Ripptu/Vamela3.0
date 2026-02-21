@@ -9,6 +9,14 @@ interface FAQItem {
 
 const FAQ_DATA: FAQItem[] = [
   {
+    question: "Warum kostet das mehr als bei Fiverr & Co.?",
+    answer: "Qualität und Strategie. Billig-Anbieter liefern oft nur Templates ohne Ziel. Ich baue verkaufspsychologisch optimierte Webseiten, die Besucher in Kunden verwandeln. Das ist eine Investition, die sich schnell amortisiert, keine Ausgabe."
+  },
+  {
+    question: "Wie lange dauert die Umsetzung eines Projekts?",
+    answer: "Im Durchschnitt 2-4 Wochen. Das hängt vom Umfang und deiner Mitarbeit (Feedback, Inhalte) ab. Wir legen zu Beginn einen klaren Zeitplan fest, damit du genau weißt, wann deine neue Seite live geht."
+  },
+  {
     question: "Was kostet eine professionelle Website bei VAMELA?",
     answer: "Da jedes Projekt unterschiedlich ist, starten meine Pakete meist im mittleren dreistelligen Bereich. Nach einem kostenlosen Erstgespräch erhältst du ein maßgeschneidertes Festpreis-Angebot ohne versteckte Kosten."
   },
@@ -48,7 +56,7 @@ const FaqSection: React.FC = () => {
   };
 
   return (
-    <section className="bg-neutral-950 py-32 relative overflow-hidden">
+    <section className="bg-neutral-950 py-32 relative">
       {/* Inject SEO Schema */}
       <script
         type="application/ld+json"

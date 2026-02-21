@@ -59,37 +59,77 @@ const Testimonials: React.FC = () => {
             </motion.div>
         </div>
 
-        {/* Big Card - Featured Client */}
-        <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="rounded-3xl overflow-hidden relative min-h-[500px] border border-white/10 group"
-        >
-             <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop" 
-                className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay transition-transform duration-1000 group-hover:scale-105" 
-                alt="Office Background" 
-             />
-             <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-transparent"></div>
-             
-             <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-center max-w-2xl">
-                <Quote className="w-12 h-12 text-brand-lime mb-8 opacity-50" />
-                <h3 className="text-2xl md:text-4xl font-serif text-white mb-8 leading-relaxed">
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            {/* Testimonial 1 */}
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] transition-all group flex flex-col h-full"
+            >
+                <Quote className="w-8 h-8 text-brand-lime mb-6 opacity-50" />
+                <p className="text-gray-300 text-lg leading-relaxed mb-8 flex-grow">
                     "Die Zusammenarbeit mit VAMELA hat unsere digitale Wahrnehmung komplett verändert. Wir bekommen nicht nur mehr Anfragen, sondern vor allem <span className="text-brand-lime">die richtigen</span>."
-                </h3>
-                
-                <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white font-serif font-bold">
+                </p>
+                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-white font-serif font-bold border border-white/10">
                         MK
                     </div>
                     <div>
-                        <p className="text-white font-bold text-lg">Markus Keller</p>
-                        <p className="text-sm text-brand-lime">Geschäftsführer, Werklotse</p>
+                        <p className="text-white font-bold text-sm">Markus Keller</p>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider">CEO, Werklotse</p>
                     </div>
                 </div>
-             </div>
-        </motion.div>
+            </motion.div>
+
+            {/* Testimonial 2 */}
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] transition-all group flex flex-col h-full"
+            >
+                <Quote className="w-8 h-8 text-brand-lime mb-6 opacity-50" />
+                <p className="text-gray-300 text-lg leading-relaxed mb-8 flex-grow">
+                    "Endlich eine Website, die so schnell ist wie unser Produkt. Das Design ist on-point und die Kommunikation war jederzeit transparent und professionell."
+                </p>
+                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-white font-serif font-bold border border-white/10">
+                        SW
+                    </div>
+                    <div>
+                        <p className="text-white font-bold text-sm">Sarah Weber</p>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider">Marketing Lead, TechStart</p>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Testimonial 3 */}
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:bg-white/[0.04] transition-all group flex flex-col h-full"
+            >
+                <Quote className="w-8 h-8 text-brand-lime mb-6 opacity-50" />
+                <p className="text-gray-300 text-lg leading-relaxed mb-8 flex-grow">
+                    "Ich war skeptisch, ob sich eine neue Website lohnt. Aber seit dem Relaunch melden sich Kunden, die wir vorher nie erreicht hätten. Beste Investition!"
+                </p>
+                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center text-white font-serif font-bold border border-white/10">
+                        TH
+                    </div>
+                    <div>
+                        <p className="text-white font-bold text-sm">Thomas Huber</p>
+                        <p className="text-xs text-gray-500 uppercase tracking-wider">Inhaber, Huber Handwerk</p>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
 
         {/* CTA Section */}
         <div className="mt-20 text-center">
