@@ -1,20 +1,43 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# VAMELA - Strategisches Webdesign
 
-# Run and deploy your AI Studio app
+Dies ist der Source Code für die VAMELA Website.
 
-This contains everything you need to run your app locally.
+## 🚀 Installation & Start
 
-View your app in AI Studio: https://ai.studio/apps/drive/185OG3uv4BiEwq_xk5mv75Sw2HaizicOZ
+1. **Node.js installieren**: Stelle sicher, dass du [Node.js](https://nodejs.org/) installiert hast (Version 18+ empfohlen).
+2. **Projekt entpacken**: Lade den Code herunter und entpacke ihn in einen Ordner.
+3. **Terminal öffnen**: Navigiere im Terminal in den Projektordner.
+4. **Abhängigkeiten installieren**:
+   ```bash
+   npm install
+   ```
+5. **Entwicklungsserver starten**:
+   ```bash
+   npm run dev
+   ```
+   Die Website läuft nun unter `http://localhost:5173`.
 
-## Run Locally
+## 📦 Build für Produktion
 
-**Prerequisites:**  Node.js
+Um die Website für den Live-Betrieb zu bauen:
 
+```bash
+npm run build
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Der optimierte Code liegt dann im `dist`-Ordner und kann auf jedem Webserver (Vercel, Netlify, Apache, Nginx) gehostet werden.
+
+## 🛠 Tech Stack
+
+- **Framework**: React + Vite
+- **Styling**: Tailwind CSS
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **Sprache**: TypeScript
+
+## 🌍 Deployment
+
+Am einfachsten ist das Deployment über [Vercel](https://vercel.com) oder [Netlify](https://netlify.com):
+1. Lade den Code auf GitHub hoch.
+2. Verknüpfe das Repo mit Vercel/Netlify.
+3. Fertig! (Build Command: `npm run build`, Output Directory: `dist`)

@@ -1,5 +1,7 @@
-import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+'use client';
+
+import React from 'react';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { PenTool, Zap, Heart, Cpu, ArrowUpRight } from 'lucide-react';
 
 interface BentoCardProps {
@@ -8,45 +10,29 @@ interface BentoCardProps {
 }
 
 const BentoCard: React.FC<BentoCardProps> = ({ children, className = "" }) => {
-  const divRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current) return;
-
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
-  const handleFocus = () => {
-    setOpacity(1);
-  };
-
-  const handleBlur = () => {
-    setOpacity(0);
+  const handleMouseMove = ({ currentTarget, clientX, clientY }: React.MouseEvent) => {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
   };
 
   return (
     <motion.div
-      ref={divRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleFocus}
-      onMouseLeave={handleBlur}
-      initial={{ opacity: 0, scale: 0.95, y: 20 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`relative rounded-3xl border border-white/5 bg-brand-surface/50 overflow-hidden backdrop-blur-sm group ${className}`}
     >
       {/* Spotlight Effect Layer */}
-      <div
-        className="pointer-events-none absolute -inset-px transition duration-300 z-10"
+      <motion.div
+        className="pointer-events-none absolute -inset-px transition duration-300 z-10 opacity-0 group-hover:opacity-100"
         style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.08), transparent 40%)`,
+          background: useMotionTemplate`radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.08), transparent 40%)`,
         }}
       />
       
@@ -54,16 +40,26 @@ const BentoCard: React.FC<BentoCardProps> = ({ children, className = "" }) => {
       <div className="relative h-full z-20 flex flex-col justify-between p-10">
         {children}
       </div>
-
-      {/* Subtle border glow on hover via pseudo element if needed, but spotlight handles most of it */}
     </motion.div>
   );
 };
 
 const BentoGrid: React.FC = () => {
+  const scrollToContact = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="services" className="bg-brand-dark py-32 relative z-10 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="services" className="bg-brand-dark py-32 relative z-10 border-t border-white/5 overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-1/2 left-0 w-full h-[500px] bg-gradient-to-r from-brand-lime/5 to-transparent blur-[120px] pointer-events-none -translate-y-1/2"></div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-20 max-w-3xl">
           <p className="text-sm text-brand-lime font-medium uppercase tracking-widest mb-4">Unsere Expertise</p>
           <h2 className="text-5xl md:text-6xl font-serif text-white mb-8">
@@ -74,6 +70,7 @@ const BentoGrid: React.FC = () => {
           </p>
         </div>
 
+        {/* Static Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-[minmax(340px,auto)]">
           
           {/* Card 1: Strategisches Branding (Span 2) */}
@@ -82,7 +79,13 @@ const BentoGrid: React.FC = () => {
               <div className="w-14 h-14 rounded-2xl bg-brand-lime/10 flex items-center justify-center text-brand-lime border border-brand-lime/20">
                 <PenTool className="w-7 h-7" />
               </div>
-              <ArrowUpRight className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors" />
+              <button 
+                onClick={scrollToContact}
+                className="relative z-30 p-2 -mr-2 -mt-2 rounded-full hover:bg-white/10 transition-colors group/btn cursor-pointer"
+                aria-label="Zum Kontaktformular"
+              >
+                <ArrowUpRight className="w-6 h-6 text-gray-600 group-hover:text-white group-hover/btn:text-brand-lime transition-colors" />
+              </button>
             </div>
             <div>
               <h3 className="text-3xl font-serif text-white mb-4 group-hover:text-brand-lime transition-colors">Strategisches Branding</h3>
@@ -130,7 +133,13 @@ const BentoGrid: React.FC = () => {
               <div className="w-14 h-14 rounded-2xl bg-brand-lime/10 flex items-center justify-center text-brand-lime border border-brand-lime/20">
                 <Cpu className="w-7 h-7" />
               </div>
-              <ArrowUpRight className="w-6 h-6 text-gray-600 group-hover:text-white transition-colors" />
+              <button 
+                onClick={scrollToContact}
+                className="relative z-30 p-2 -mr-2 -mt-2 rounded-full hover:bg-white/10 transition-colors group/btn cursor-pointer"
+                aria-label="Zum Kontaktformular"
+              >
+                <ArrowUpRight className="w-6 h-6 text-gray-600 group-hover:text-white group-hover/btn:text-brand-lime transition-colors" />
+              </button>
             </div>
             <div>
               <h3 className="text-3xl font-serif text-white mb-4 group-hover:text-brand-lime transition-colors">Skalierbare Technik</h3>
@@ -142,6 +151,22 @@ const BentoGrid: React.FC = () => {
              <div className="absolute left-0 top-0 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
           </BentoCard>
 
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 flex justify-center">
+             <div className="inline-flex flex-col md:flex-row items-center gap-6 p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
+                <div className="text-center md:text-left">
+                    <h4 className="text-xl font-serif text-white">Unsicher, was du brauchst?</h4>
+                    <p className="text-gray-400 text-sm">Lass uns in 15 Minuten herausfinden, wie wir dir helfen können.</p>
+                </div>
+                <button 
+                    onClick={scrollToContact}
+                    className="px-6 py-3 bg-brand-lime text-brand-dark font-bold rounded-lg hover:bg-[#c2e040] transition-colors whitespace-nowrap"
+                >
+                    Kostenloses Strategiegespräch
+                </button>
+             </div>
         </div>
       </div>
     </section>

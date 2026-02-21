@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Instagram, Linkedin, Mail, MapPin } from 'lucide-react';
+import { ArrowRight, Instagram, Linkedin, Mail, Twitter, Zap } from 'lucide-react';
 import { LegalPageType } from './Legal';
 
 interface FooterProps {
@@ -55,11 +55,14 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div>
               <h4 className="text-white font-medium mb-6">Socials</h4>
               <div className="flex gap-4">
-                 <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">
+                 <a href="https://www.linkedin.com/in/christian-stockmeier-5663773a9/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">
                     <Linkedin className="w-5 h-5"/>
                  </a>
                  <a href="https://www.instagram.com/vamela_studio" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">
                     <Instagram className="w-5 h-5"/>
+                 </a>
+                 <a href="https://x.com/Vamela_design" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all">
+                    <Twitter className="w-5 h-5"/>
                  </a>
               </div>
             </div>
@@ -100,9 +103,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <h4 className="text-white font-medium mb-6">Kontakt</h4>
                <ul className="space-y-4 text-sm">
                 <li>
-                  <a href="mailto:stockmeier.ch@gmail.com" className="text-gray-500 hover:text-white transition-colors flex items-center gap-3">
+                  <a href="mailto:info@vamela.info" className="text-gray-500 hover:text-white transition-colors flex items-center gap-3">
                     <Mail className="w-5 h-5 shrink-0" /> 
-                    stockmeier.ch@gmail.com
+                    info@vamela.info
                   </a>
                 </li>
               </ul>
@@ -114,6 +117,11 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <p className="text-sm text-gray-600">
               © 2026 VAMELA. Made in Bavaria.
             </p>
+            
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
+                <Zap className="w-3 h-3 text-green-500 fill-current" />
+                <span className="text-xs font-bold text-green-500 uppercase tracking-wider">100% Performance</span>
+            </div>
           </div>
         </div>
       </div>

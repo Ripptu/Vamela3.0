@@ -1,10 +1,21 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+'use client';
+
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { TrendingUp, Activity } from 'lucide-react';
 
 const FeatureSpotlight: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const cardY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 10]);
+
   return (
-    <section className="bg-brand-dark py-32 border-t border-white/5 relative overflow-hidden">
+    <section ref={containerRef} className="bg-brand-dark py-32 border-t border-white/5 relative overflow-hidden">
       {/* Background gradients */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-lime/5 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
 
@@ -23,6 +34,7 @@ const FeatureSpotlight: React.FC = () => {
           
           {/* Left Column (Text) */}
           <motion.div 
+            style={{ y: textY }}
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -47,6 +59,7 @@ const FeatureSpotlight: React.FC = () => {
 
           {/* Right Column (Visual) */}
           <motion.div 
+            style={{ y: cardY }}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}

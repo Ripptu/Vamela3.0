@@ -11,20 +11,28 @@ import {
   Globe,
   RefreshCcw,
   Palette,
-  Search
+  Search,
+  ShoppingBag,
+  Zap,
+  PenTool,
+  LifeBuoy
 } from 'lucide-react';
 
 const PROJECT_TYPES = [
   { id: 'website', label: 'Neue Website', icon: Globe },
   { id: 'relaunch', label: 'Relaunch', icon: RefreshCcw },
+  { id: 'ecommerce', label: 'E-Commerce / Shop', icon: ShoppingBag },
   { id: 'branding', label: 'Branding & Logo', icon: Palette },
   { id: 'seo', label: 'SEO / Sichtbarkeit', icon: Search },
+  { id: 'performance', label: 'Performance / Speed', icon: Zap },
+  { id: 'content', label: 'Content & Texte', icon: PenTool },
+  { id: 'maintenance', label: 'Wartung & Support', icon: LifeBuoy },
 ];
 
 const BUDGET_OPTIONS = [
-  "Start-Budget (1.500€ – 3.000€)",
-  "Growth (3.000€ – 6.000€)",
-  "Premium (> 6.000€)",
+  "Start-Budget (500€ – 1.500€)",
+  "Growth (1.500€ – 3.000€)",
+  "Premium (> 3.000€)",
   "Ich brauche erst eine Beratung"
 ];
 
@@ -51,11 +59,29 @@ const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    city: '',
     message: '',
     budget: '',
     projectTypes: [] as string[]
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  React.useEffect(() => {
+     const fetchLocation = async () => {
+      try {
+        const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+        if (!response.ok) throw new Error('Geo fetch failed');
+        
+        const data = await response.json();
+        if (data.city && data.city.length > 0) {
+          setFormData(prev => ({ ...prev, city: data.city }));
+        }
+      } catch (error) {
+        console.debug("Locality fetch failed");
+      }
+    };
+    fetchLocation();
+  }, []);
 
   const nextStep = () => {
     if (step < 3) {
@@ -153,14 +179,14 @@ const ContactForm: React.FC = () => {
                 </div>
                 <div>
                     <p className="text-xs text-gray-500 uppercase tracking-wider mb-0.5">Schreib mir direkt</p>
-                    <a href="mailto:stockmeier.ch@gmail.com" className="text-lg font-medium hover:text-brand-lime transition-colors">stockmeier.ch@gmail.com</a>
+                    <a href="mailto:info@vamela.info" className="text-lg font-medium hover:text-brand-lime transition-colors">info@vamela.info</a>
                 </div>
             </div>
         </div>
 
         {/* Right Column: Multi-Step Wizard */}
         <div className="lg:col-span-3">
-            <div className="relative bg-white/[0.02] border border-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 shadow-2xl min-h-[500px] flex flex-col">
+            <div className="relative bg-white/[0.02] border border-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 shadow-2xl min-h-[600px] flex flex-col">
                 
                 {/* Progress Bar */}
                 <div className="w-full h-1 bg-white/5 rounded-full mb-8 relative overflow-hidden">
@@ -173,7 +199,7 @@ const ContactForm: React.FC = () => {
                 </div>
 
                 {/* Wizard Content */}
-                <div className="flex-1 relative overflow-hidden">
+                <div className="flex-1 relative overflow-hidden flex flex-col">
                     <AnimatePresence mode="wait" custom={direction}>
                         
                         {/* STEP 1 */}
@@ -190,7 +216,7 @@ const ContactForm: React.FC = () => {
                             >
                                 <h3 className="text-2xl font-serif text-white mb-8">Wobei darf ich dich unterstützen?</h3>
                                 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 overflow-y-auto max-h-[450px] pr-2 custom-scrollbar">
                                     {PROJECT_TYPES.map((type) => {
                                         const isSelected = formData.projectTypes.includes(type.label);
                                         const Icon = type.icon;
@@ -204,7 +230,7 @@ const ContactForm: React.FC = () => {
                                                     : 'bg-white/5 border-white/10 hover:bg-white/10'
                                                 }`}
                                             >
-                                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+                                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors shrink-0 ${
                                                     isSelected ? 'bg-brand-lime text-brand-dark' : 'bg-white/5 text-gray-400 group-hover:text-white'
                                                 }`}>
                                                     <Icon className="w-5 h-5" />
@@ -340,6 +366,25 @@ const ContactForm: React.FC = () => {
                                             className="absolute text-sm text-gray-400 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-brand-lime"
                                         >
                                             Deine E-Mail <span className="text-brand-lime">*</span>
+                                        </label>
+                                    </div>
+
+                                    {/* City Input */}
+                                    <div className="relative group">
+                                        <input 
+                                            type="text"
+                                            id="city"
+                                            name="city"
+                                            value={formData.city}
+                                            onChange={handleChange}
+                                            className="block px-4 pt-6 pb-2 w-full text-white bg-white/5 border border-white/10 rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-brand-lime peer placeholder-transparent"
+                                            placeholder="Stadt"
+                                        />
+                                        <label 
+                                            htmlFor="city" 
+                                            className="absolute text-sm text-gray-400 duration-300 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-brand-lime"
+                                        >
+                                            Deine Stadt (Optional)
                                         </label>
                                     </div>
 

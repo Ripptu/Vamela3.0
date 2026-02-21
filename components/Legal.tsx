@@ -34,7 +34,7 @@ const Legal: React.FC<LegalProps> = ({ type, onBack }) => {
               <h2 className="text-2xl font-medium text-white mb-4">Kontakt</h2>
               <p className="text-gray-300 leading-relaxed">
                 Telefon: <a href="tel:+4917624200179" className="hover:text-brand-lime transition-colors">+49 176 24200179</a><br />
-                E-Mail: <a href="mailto:stockmeier.ch@gmail.com" className="hover:text-brand-lime transition-colors">stockmeier.ch@gmail.com</a>
+                E-Mail: <a href="mailto:info@vamela.info" className="hover:text-brand-lime transition-colors">info@vamela.info</a>
               </p>
             </section>
 
